@@ -1,3 +1,40 @@
+//===============================
+// Title: Photoresistor LUX Meter + RGB/Buzzer Indicator
+//===============================
+//
+// Program Detail:
+//
+// Purpose: Read ambient light with an HW-486 (LDR) on NodeMCU-ESP12,
+//          convert ADC → Lux using a 2-point power-law calibration,
+//          and indicate level by RGB color (blue→red) and a buzzer in dark.
+//          Added a feature where typing 'b' to run a 5 s buzzer test.
+//
+// Inputs:  
+//   - A0 : Analog input from HW-486 (AO pin via voltage divider)
+//
+// Outputs: 
+//   - Serial: Prints LUX (float) once per loop
+//   - D6/D7/D8: PWM to RGB LED (common-cathode) → R-D6, G-D7, B-D8
+//   - D5: Buzzer (HIGH=ON)
+//
+// Date:    2025-09-29
+// Compiler/Platform: Arduino/PlatformIO (ESP8266 NodeMCU-ESP12)
+// Authors: Osvaldo Ramirez & Aaron John Estrada
+//
+// Versions:
+//   V1 – Initial bring-up: basic ADC read + RGB/Buzzer I/O scaffold
+//
+// File Dependencies:
+//   N/A
+//
+// Hardware Notes:
+//   - Sensor: HW-486 photoresistor module (AO → A0). Ensure proper 3V3 scaling.
+//   - LED: Common-cathode RGB on D6/D7/D8 (use COMMON_ANODE=false).
+//   - Buzzer: Active/passive on D5 (driven as digital HIGH/LOW).
+//
+// Usage Notes:
+//   - Set L1_LUX / L2_LUX to your two reference lux points before calibration.
+//
 
 #include <Arduino.h>
 
